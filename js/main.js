@@ -20,7 +20,6 @@ function calcularValorCuota(importe, cuotasRecargo, cuotas){
 function calcularPorcentaje(cuotasConRecargo){
     let valorPorcentaje = ((cuotasConRecargo - 1) * 100)
     return valorPorcentaje.toFixed(2)
-
 }
 
 function calculoPagoConTarjeta(empresa, importe){
