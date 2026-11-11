@@ -29,21 +29,39 @@ function calculoPagoConTarjeta(empresa, importe){
     let porcentaje
     let costoTotalFinanciado
     let mensaje
-    let cuotasEmpresa = parseInt(prompt("Ingrese la cantidad de cuotas: de 1 a 12"))
-            cuotasRecargo = recargarCuotas(cuotasEmpresa)
-            importeCuota = calcularValorCuota (importe, cuotasRecargo, cuotasEmpresa)
-            porcentaje = calcularPorcentaje(cuotasRecargo)
-            costoTotalFinanciado = calcularCostoTotal (importe, cuotasRecargo)
-            mensaje = "Por su compra de $ " + importe + " con " + empresa + ", abonara un recargo de " + porcentaje + " %: \n" + cuotasEmpresa + " cuotas de $ " + importeCuota +  "\nCosto total financiado: $ " + costoTotalFinanciado.toFixed(2)
-            return mensaje 
+    let cuotasEmpresa
+    let cuotasValido = false
+    do {
+        cuotasEmpresa = parseInt(prompt("Ingrese la cantidad de cuotas: de 1 a 12"))
+        if (cuotasEmpresa >= 1 && cuotasEmpresa <= 12){
+            cuotasValido = true
+        } else {
+            console.log("Ingrese una cantidad de cuotas validas, de 1 a 12")    
+        }
+    } while (cuotasValido == false)
+    cuotasRecargo = recargarCuotas(cuotasEmpresa)
+    importeCuota = calcularValorCuota (importe, cuotasRecargo, cuotasEmpresa)
+    porcentaje = calcularPorcentaje(cuotasRecargo)
+    costoTotalFinanciado = calcularCostoTotal (importe, cuotasRecargo)
+    mensaje = "Por su compra de $ " + importe + " con " + empresa + ", abonara un recargo de " + porcentaje + " %: \n" + cuotasEmpresa + " cuotas de $ " + importeCuota +  "\nCosto total financiado: $ " + costoTotalFinanciado.toFixed(2)
+    return mensaje 
 }
 
 const calcularCostoTotal = (importe, cuotasRecargo) => importe * cuotasRecargo
 
 let pagar = true
 while(pagar) {
-    
-    let importe = parseFloat(prompt("Ingrese el importe de la compra"))
+    let importeValido = false
+    let importe
+    do {
+        importe = parseFloat(prompt("Ingrese el importe de la compra"))
+        if (importe > 0){
+            importeValido = true
+        } else {
+            console.log("Ingrese un importe válido, mayor a 0")
+        } 
+    } while (importeValido == false)
+
     let menu = parseInt(prompt("Ingrese una opcion de pago: 1 VISA, 2 MASTERCARD, 3 AMERICAN EXPRESS, 4 MERCADOPAGO o 5 EFECTIVO"))
     
     switch(menu) {
@@ -73,4 +91,5 @@ while(pagar) {
         pagar = false
         alert("Gracias por su compra!")
     }
+
 }
