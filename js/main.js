@@ -1,4 +1,21 @@
-//Simulador de modulo de pago 
+//Simulador de productos en carrito y modulo de pago 
+
+
+
+
+function listarCarrito(lista) {
+    console.log("--- Productos en carrito de compras ---")
+    for (const producto of lista) {
+    console.log(`Producto: ${producto}`)
+    }
+    console.log(`Total: ${lista.length} productos`)
+}
+
+
+
+
+
+
 
 function recargarCuotas(cantidadCuotas){
     let recargo
@@ -47,6 +64,26 @@ function calculoPagoConTarjeta(empresa, importe){
 }
 
 const calcularCostoTotal = (importe, cuotasRecargo) => importe * cuotasRecargo
+
+const productosEnCarrito = ["Teclado", "Mouse", "Monitor", "Webcam", "Auriculares"]
+productosEnCarrito.push("Parlantes")    
+productosEnCarrito.unshift("Notebook")  
+
+const productoBajaCarrito = productosEnCarrito.pop() 
+console.log(`Se ha eliminado el elemento: ${productoBajaCarrito}`);
+
+const buscadoEnCarrito = prompt("¿Qué producto quiere buscar?")
+if (productosEnCarrito.includes(buscadoEnCarrito)) {
+    const posicion = productosEnCarrito.indexOf(buscadoEnCarrito)
+    console.log(` "${buscadoEnCarrito}" está en stock, en la posición ${posicion}`)
+} else {
+    console.log(` "${buscadoEnCarrito}" no está en stock`)
+}
+
+productosEnCarrito.splice(2, 1, "Mouse inalámbrico") 
+
+console.log("Estos son los productos en su carrito")
+listarCarrito(productosEnCarrito)
 
 let pagar = true
 while(pagar) {
